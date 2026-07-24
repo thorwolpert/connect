@@ -2,6 +2,19 @@
   "name": "design",
   "private": true,
   "type": "module",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@sbc-connect/nuxt-auth",
+      "@sbc-connect/nuxt-base",
+      "@sbc-connect/nuxt-forms",
+      "@sbc-connect/nuxt-pay",
+      "better-sqlite3",
+      "esbuild",
+      "sharp",
+      "vue-demi"
+    ]
+  },
   "scripts": {
     "build": "nuxt build",
     "build:static": "STUDIO=false nuxt generate",
