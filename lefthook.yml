@@ -1,0 +1,12 @@
+# Lefthook Git hooks configuration for Nuxt implementation
+# https://github.com/evilmartians/lefthook
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{js,ts,jsx,tsx,vue}"
+      run: pnpm run lint
+    typecheck:
+      glob: "*.{js,ts,vue}"
+      run: pnpm run typecheck
