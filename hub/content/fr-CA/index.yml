@@ -1,0 +1,68 @@
+locale: fr-CA
+seo:
+  title: Connect | Portail G2G
+  description: Passerelle centralisée sécurisée pour les services en ligne de la Colombie-Britannique.
+hero:
+  badge: Infrastructure G2G officielle
+  title: Connectez-vous en toute sécurité aux services en ligne de la C.-B.
+  description: La passerelle centralisée pour le gouvernement, les citoyens et les partenaires commerciaux. Établie en vertu de la <span class="font-semibold text-zinc-900 dark:text-zinc-100 underline decoration-bc-gold decoration-2">Loi sur BC Online</span> pour garantir la fiabilité et la conformité législative.
+  links:
+    - label: Explorer les services
+      color: primary
+      icon: i-lucide-arrow-right
+      trailing: true
+      to: '#'
+    - label: Spécifications techniques
+      variant: outline
+      to: '#'
+portalSection:
+  title: Accéder au portail
+  subtitle: Sélectionnez votre type d'identifiant pour commencer votre session.
+loginCards:
+  - title: Gouvernement et secteur public
+    description: Accès sécurisé pour les employés de la fonction publique de la C.-B. et les partenaires du secteur public élargi à l'aide d'identifiants internes.
+    icon: i-lucide-landmark
+    badgeLabel: Interne uniquement
+    primaryButton:
+      label: Connexion avec IDIR
+      idpHint: idir
+    secondaryButton:
+      label: Connexion fédérée
+      variant: outline
+  - title: Citoyens et professionnels
+    description: Le point d'accès principal pour les résidents de la C.-B., les professionnels de la santé et les praticiens juridiques individuels.
+    icon: i-lucide-user
+    badge: Recommandé
+    primaryButton:
+      label: Carte de services de la C.-B. (BCSC)
+      idpHint: bcsc
+    extraButton:
+      label: Compte BCeID
+      idpHint: bceid
+  - title: Partenaires B2B et SaaS
+    description: Pour les entités corporatives et les fournisseurs de services s'intégrant directement à l'infrastructure de BC Online via des API.
+    icon: i-lucide-network
+    primaryButton:
+      label: Portail des partenaires B2B
+    secondaryButton:
+      label: Enregistrement de l'entreprise
+      variant: outline
+helpSection:
+  title: Comment pouvons-nous vous aider aujourd'hui ?
+  items:
+    - title: Je suis un citoyen
+      description: Parcourez plus de 250+ services publics et formulaires disponibles.
+      icon: i-lucide-globe
+      to: '#'
+    - title: Je suis un développeur
+      description: Accédez à la documentation des API, aux bacs à sable et aux spécifications techniques.
+      icon: i-lucide-code-2
+      to: '#'
+    - title: Je suis un utilisateur gouvernemental
+      description: Découvrez comment lancer et intégrer votre propre service.
+      icon: i-lucide-rocket
+      to: '#'
+chatWidget:
+  title: Bonjour !
+  description: Je suis votre assistant Connect. Comment puis-je vous aider à vous connecter aujourd'hui ?
+  buttonLabel: Démarrer le clavardage
