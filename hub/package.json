@@ -1,0 +1,42 @@
+{
+  "name": "hub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@google-cloud/cloud-sql-connector": "^1.11.2",
+    "@iconify-json/lucide": "^1.2.114",
+    "@iconify-json/simple-icons": "^1.2.87",
+    "@nuxt/content": "^3.14.0",
+    "@nuxt/ui": "^4.9.0",
+    "@sbc-connect/nuxt-pay": "^0.5.2",
+    "@vueuse/nuxt": "^14.3.0",
+    "drizzle-orm": "^0.45.2",
+    "jose": "^6.2.3",
+    "motion-v": "^2.3.0",
+    "nuxt": "^4.4.8",
+    "pg": "^8.22.0",
+    "shaders": "^2.5.132",
+    "tailwindcss": "^4.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@iconify-json/mdi": "^1.2.3",
+    "@nuxt/eslint": "^1.16.0",
+    "@playwright/test": "^1.61.1",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^10.6.0",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.5",
+    "yaml": "^2.9.0"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

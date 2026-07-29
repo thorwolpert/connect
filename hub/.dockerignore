@@ -1,0 +1,29 @@
+# Ignore local dependency folders
+node_modules
+**/node_modules
+
+# Ignore local build and cache outputs
+.nuxt
+.output
+.cache
+/tmp
+
+# Ignore IDE settings and local environment files
+.env
+*.local
+.vscode
+.idea
+
+# Ignore version control systems
+.git
+.github
+.gitignore
+
+# Ignore local build management files
+artifacts
+node_modules
+playwright-report
+playwright.config.ts
+renovate.json
+test-data
+test-results

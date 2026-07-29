@@ -1,0 +1,68 @@
+locale: en-CA
+seo:
+  title: Connect | G2G Portal
+  description: The centralized gateway for government, citizens, and business partners. Provisioned under the BC Online Act to ensure reliability and legislative compliance.
+hero:
+  badge: Official G2G Infrastructure
+  title: Securely Connect to BC Online Services.
+  description: The centralized gateway for government, citizens, and business partners. Provisioned under the <span class="font-semibold text-zinc-900 dark:text-zinc-100 underline decoration-bc-gold decoration-2">BC Online Act</span> to ensure reliability and legislative compliance.
+  links:
+    - label: Explore Services
+      color: primary
+      icon: i-lucide-arrow-right
+      trailing: true
+      to: '#'
+    - label: Technical Specs
+      variant: outline
+      to: '#'
+portalSection:
+  title: Access the Portal
+  subtitle: Select your credential type to begin your session.
+loginCards:
+  - title: Government & Public Sector
+    description: Secure access for BC Public Service employees and Broader Public Sector partners using internal credentials.
+    icon: i-lucide-landmark
+    badgeLabel: Internal Only
+    primaryButton:
+      label: Login with IDIR
+      idpHint: idir
+    secondaryButton:
+      label: Federated Login
+      variant: outline
+  - title: Citizens & Professionals
+    description: The primary access point for BC residents, health professionals, and individual legal practitioners.
+    icon: i-lucide-user
+    badge: Recommended
+    primaryButton:
+      label: BC Service Card (BCSC)
+      idpHint: bcsc
+    extraButton:
+      label: BCeID Account
+      idpHint: bceid
+  - title: B2B & SaaS Partners
+    description: For corporate entities and service providers integrating directly with the BC Online infrastructure via APIs.
+    icon: i-lucide-network
+    primaryButton:
+      label: B2B Partner Portal
+    secondaryButton:
+      label: Enterprise Registration
+      variant: outline
+helpSection:
+  title: How can we help you today?
+  items:
+    - title: I am a Citizen
+      description: Browse over 250+ available public services and forms.
+      icon: i-lucide-globe
+      to: '#'
+    - title: I am a Developer
+      description: Access API documentation, sandboxes, and tech specs.
+      icon: i-lucide-code-2
+      to: '#'
+    - title: I am a Gov User
+      description: Learn how to launch and onboard your own service.
+      icon: i-lucide-rocket
+      to: '#'
+chatWidget:
+  title: Hi there!
+  description: I'm your Connect assistant. How can I help you log in today?
+  buttonLabel: Start Chat
