@@ -8,6 +8,20 @@
       "when": 1783106030268,
       "tag": "0000_daily_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786063000000,
+      "tag": "0001_add_service_catalog_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786110000000,
+      "tag": "0002_add_service_links",
+      "breakpoints": true
     }
   ]
 }

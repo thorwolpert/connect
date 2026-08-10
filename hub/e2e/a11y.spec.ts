@@ -42,4 +42,18 @@ test.describe('Accessibility Audits', () => {
     // Assert that there are no violations
     expect(results.violations).toEqual([])
   })
+
+  test('services page should have no accessibility violations', async ({ page }) => {
+    await page.goto('/services')
+    const container = page.locator('[data-testid="services-page-container"]')
+    await container.waitFor({ state: 'visible', timeout: 15000 })
+    const results = await new AxeBuilder({ page }).include('[data-testid="services-page-container"]').analyze()
+
+    if (results.violations.length > 0) {
+      console.log('AXE VIOLATIONS (Services Page):')
+      console.dir(results.violations, { depth: null })
+    }
+
+    expect(results.violations).toEqual([])
+  })
 })

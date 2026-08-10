@@ -8,7 +8,19 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "node scripts/seed-db.cjs",
+    "db:purge": "node scripts/purge-db.cjs",
+    "db:reset": "node scripts/purge-db.cjs && node scripts/seed-db.cjs",
+    "build:api": "bash scripts/build-api.sh",
+    "deploy:api": "bash scripts/deploy-api.sh",
+    "deploy:hosting": "bash scripts/deploy-hosting.sh",
+    "deploy": "bash scripts/deploy-api.sh && bash scripts/deploy-hosting.sh"
   },
   "dependencies": {
     "@google-cloud/cloud-sql-connector": "^1.11.2",

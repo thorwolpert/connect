@@ -25,6 +25,13 @@ export const applications = hubSchema.table('applications', {
   deploymentTargets: jsonb('deployment_targets').default([]),
   gcpProjectId: varchar('gcp_project_id', { length: 255 }),
   platformServices: jsonb('platform_services').default([]),
+  category: varchar('category', { length: 255 }).default('Public Applications'),
+  status: varchar('status', { length: 50 }).default('Production'),
+  ministry: varchar('ministry', { length: 255 }),
+  features: jsonb('features').default([]),
+  tags: jsonb('tags').default([]),
+  links: jsonb('links').default({}),
+  icon: varchar('icon', { length: 255 }).default('i-lucide-app-window'),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
 })
