@@ -148,5 +148,53 @@ export default {
         }
       }
     }
+  },
+  serviceCatalog: {
+    seoTitle: 'Catalogue de services',
+    seoDescription: 'Explorez et accédez aux applications publiques et aux services gouvernementaux internes. Filtrez par nom, catégorie ou ministère.',
+    title: 'Catalogue de services',
+    subtitle: 'Explorez et accédez aux applications publiques et aux services gouvernementaux internes. Filtrez par nom, catégorie ou ministère.',
+    searchPlaceholder: 'Rechercher des services...',
+    sortLabel: 'Trier les services',
+    sortAZ: 'Trier : A-Z',
+    sortZA: 'Trier : Z-A',
+    filterByCategory: 'Filtrer par catégorie...',
+    filterByStatus: 'Filtrer par statut...',
+    filterByMinistry: 'Filtrer par ministère...',
+    clearAllFilters: 'Tout effacer',
+    activeFiltersLabel: 'Filtres actifs :',
+    addFilter: 'Ajouter un filtre',
+    removeFilter: 'Supprimer le filtre',
+    emptyTitle: 'Aucun service ne correspond à vos filtres',
+    emptySubtitle: 'Essayez d\'effacer les filtres actifs ou d\'ajuster vos termes de recherche pour voir les services disponibles.',
+    resetFilters: 'Réinitialiser les filtres',
+    links: {
+      launchApp: 'Lancer l\'application',
+      viewService: 'Afficher le service',
+      homePage: 'Page d\'accueil',
+      userDocs: 'Docs utilisateur',
+      devDocs: 'Docs développeur'
+    },
+    modal: {
+      title: 'Ajouter un filtre',
+      categoryLabel: 'Catégorie',
+      categoryPlaceholder: 'Sélectionner une catégorie...',
+      statusLabel: 'Statut',
+      statusPlaceholder: 'Sélectionner un statut...',
+      ministryLabel: 'Ministère / Service',
+      ministryPlaceholder: 'Sélectionner un ministère...',
+      cancel: 'Annuler',
+      apply: 'Appliquer le filtre',
+      close: 'Fermer la boîte de dialogue'
+    },
+    categories: {
+      publicApps: 'Applications publiques',
+      govServices: 'Services gouvernementaux et BPS',
+      otherServices: 'Autres services'
+    },
+    status: {
+      production: 'Production',
+      beta: 'Bêta'
+    }
   }
 }

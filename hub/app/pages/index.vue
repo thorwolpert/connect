@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const { login, isAuthenticated, authUser } = useConnectAuth()
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 watch(isAuthenticated, async (auth) => {
   if (auth) {
     if (authUser.value.loginSource === 'IDIR') {
       const path = useRoute().path
       if (path === '/' || path === '/en-CA' || path === '/en-CA/') {
-        const localePath = useLocalePath()
         await navigateTo(localePath('/intent'))
       }
     }
@@ -78,6 +78,7 @@ const toggleChatAssistant = () => {
               :trailing="link.trailing"
               :color="link.color as any || 'primary'"
               :variant="link.variant as any || 'solid'"
+              :to="link.to && link.to !== '#' ? localePath(link.to) : localePath('/services')"
               size="lg"
               :class="[
                 'px-6 py-3 rounded-lg',

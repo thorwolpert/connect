@@ -27,3 +27,5 @@ playwright.config.ts
 renovate.json
 test-data
 test-results
+
+internal

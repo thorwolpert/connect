@@ -148,5 +148,53 @@ export default {
         }
       }
     }
+  },
+  serviceCatalog: {
+    seoTitle: 'Service Catalog',
+    seoDescription: 'Explore and access public applications and internal government services. Filter by name, category, or ministry.',
+    title: 'Service Catalog',
+    subtitle: 'Explore and access public applications and internal government services. Filter by name, category, or ministry.',
+    searchPlaceholder: 'Search services...',
+    sortLabel: 'Sort services',
+    sortAZ: 'Sort: A-Z',
+    sortZA: 'Sort: Z-A',
+    filterByCategory: 'Filter by Category...',
+    filterByStatus: 'Filter by Status...',
+    filterByMinistry: 'Filter by Ministry...',
+    clearAllFilters: 'Clear All',
+    activeFiltersLabel: 'Active Filters:',
+    addFilter: 'Add Filter',
+    removeFilter: 'Remove filter',
+    emptyTitle: 'No services match your filters',
+    emptySubtitle: 'Try clearing active filters or adjusting your search terms to see available services.',
+    resetFilters: 'Reset filters',
+    links: {
+      launchApp: 'Launch App',
+      viewService: 'View Service',
+      homePage: 'Home Page',
+      userDocs: 'User Docs',
+      devDocs: 'Dev Docs'
+    },
+    modal: {
+      title: 'Add Filter',
+      categoryLabel: 'Category',
+      categoryPlaceholder: 'Select Category...',
+      statusLabel: 'Status',
+      statusPlaceholder: 'Select Status...',
+      ministryLabel: 'Ministry / Service',
+      ministryPlaceholder: 'Select Ministry...',
+      cancel: 'Cancel',
+      apply: 'Apply Filter',
+      close: 'Close modal'
+    },
+    categories: {
+      publicApps: 'Public Applications',
+      govServices: 'Government & BPS Services',
+      otherServices: 'Other Services'
+    },
+    status: {
+      production: 'Production',
+      beta: 'Beta'
+    }
   }
 }

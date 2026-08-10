@@ -11,7 +11,7 @@ hero:
       color: primary
       icon: i-lucide-arrow-right
       trailing: true
-      to: '#'
+      to: '/services'
     - label: Technical Specs
       variant: outline
       to: '#'

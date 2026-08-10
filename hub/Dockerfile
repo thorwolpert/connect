@@ -1,51 +1,44 @@
 # ==========================================
 # Stage 1: Build the Nuxt Application
 # ==========================================
-FROM node:22-slim AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
-
-# Install Python and C++ build tools for Debian Slim
-# This guarantees SQLite can compile from source if the pre-built binary fails under Mac emulation
-RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 # Enable pnpm natively using corepack
 RUN corepack enable pnpm
 
-# Copy only the package manifest and the pnpm lockfile
+# Copy package manifests
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Configure pnpm to allow postinstall scripts, then install dependencies
+# Configure pnpm and install build dependencies
 RUN pnpm config set ignore-scripts false && pnpm install --frozen-lockfile
 
-# Copy the rest of the application code
+# Copy application source code
 COPY . .
 
-# THE FIX: Tell Node it's allowed to use 8GB of RAM for the build phase
+# Set max memory limit for build phase
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# Build the Nuxt application (Compiles Markdown files directly into the SQLite index snapshot)
+# Build the Nuxt application (bundles all server dependencies into .output/)
 RUN pnpm run build
 
 # ==========================================
-# Stage 2: Production Runner
+# Stage 2: Production Runner (Google Distroless)
 # ==========================================
-FROM node:22-slim
+FROM gcr.io/distroless/nodejs22-debian12
 
 WORKDIR /app
 
-# Install the underlying shared operating system library needed for runtime SQLite stability
-RUN apt-get update && apt-get install -y libsqlite3-0 && rm -rf /var/lib/apt/lists/*
-
-# Copy ONLY the compiled .output directory and the migrations from the builder stage
+# Copy ONLY compiled .output directory and DB migrations from builder stage
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/server/db/migrations ./server/db/migrations
 
-# Establish server configurations for serverless execution
+# Set environment variables for Cloud Run execution
 ENV PORT=8080
 ENV NODE_ENV=production
 
 EXPOSE 8080
 
-# Start the standalone Nitro Node server
-CMD ["node", ".output/server/index.mjs"]
+# Start standalone Nitro Node server (Distroless node binary is default entrypoint)
+CMD [".output/server/index.mjs"]

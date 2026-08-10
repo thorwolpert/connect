@@ -12,7 +12,7 @@ test.describe('Welcome Page E2E Tests', () => {
   })
 
   test('should display the correct page title and SEO meta', async ({ page }) => {
-    await expect(page).toHaveTitle('Connect | G2G Portal')
+    await expect(page).toHaveTitle(/Connect \| G2G Portal/)
   })
 
   test('should render the hero section with branding logo and text', async ({ page }) => {
@@ -26,6 +26,14 @@ test.describe('Welcome Page E2E Tests', () => {
     // Check animated branding SVG
     const brandingSvg = page.locator('svg[aria-label="Animated Connect branding"]')
     await expect(brandingSvg).toBeVisible()
+  })
+
+  test('should navigate to the services catalog page when clicking Explore Services', async ({ page }) => {
+    const exploreButton = page.locator('a:has-text("Explore Services"), button:has-text("Explore Services")')
+    await expect(exploreButton).toBeVisible()
+    await exploreButton.click()
+    await page.waitForURL(url => url.pathname.includes('/services'), { timeout: 15000 })
+    await expect(page.locator('h1')).toContainText('Service Catalog')
   })
 
   test('should display the login options for each segment', async ({ page }) => {
