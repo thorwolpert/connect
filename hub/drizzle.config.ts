@@ -30,7 +30,7 @@ function loadEnvFile(fileName: string) {
         if (match) {
           const key = match[1]
           let value = match[2] || ''
-          if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+          if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith('\'') && value.endsWith('\''))) {
             value = value.slice(1, -1)
           }
           if (!loadedKeys.has(key)) {
@@ -65,5 +65,3 @@ export default defineConfig({
     ssl: process.env.DB_SSL === 'true'
   }
 })
-
-

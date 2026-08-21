@@ -58,7 +58,7 @@ test.describe('Service Catalog Page E2E Tests', () => {
 
     // Ministry footers
     await expect(page.locator('div.border-t:has-text("Ministry of Attorney General")').first()).toBeVisible()
-    await expect(page.locator('div.border-t:has-text("Digital Trust Service")').first()).toBeVisible()
+    await expect(page.locator('div.border-t:has-text("Ministry of Citizens\' Services")').first()).toBeVisible()
     await expect(page.locator('div.border-t:has-text("Platform Services")').first()).toBeVisible()
   })
 

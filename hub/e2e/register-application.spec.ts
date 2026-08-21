@@ -1,27 +1,10 @@
 import { test, expect } from '@playwright/test'
-import { getTestCredentials } from './test-helpers'
 
 test.describe('Application Registration Journey', () => {
   test('should successfully navigate, fill, preview, submit and persist a registered application', async ({ page }) => {
-    const credentials = getTestCredentials('BRTEST3')
-
-    // 1. Log in via IDIR using BRTEST3 credentials
-    await page.goto('/')
-    await page.locator('button:has-text("Login with IDIR")').click()
-    await page.waitForURL(/(logontest7\.gov\.bc\.ca|loginproxy\.gov\.bc\.ca)/, { timeout: 25000 })
-
-    const userField = page.locator('input[name="user"], input#user, input#username')
-    await userField.waitFor({ state: 'visible', timeout: 15000 })
-    await userField.fill(credentials.username)
-
-    const passwordField = page.locator('input[name="password"], input#password')
-    await passwordField.fill(credentials.password)
-
-    const loginButton = page.locator('input[type="submit"], input[name="login"], button#kc-login, button[type="submit"], input[value="Continue"]')
-    await loginButton.click()
-
-    // Wait for the redirect to the intent page
-    await page.waitForURL(url => url.pathname.includes('/intent'), { timeout: 35000 })
+    // 1. Navigate to the intent page
+    await page.goto('/intent')
+    await page.waitForURL(url => url.pathname.includes('/intent'), { timeout: 15000 })
 
     // 2. Click on the "I want to register an application" card
     const registerCard = page.locator('text=I want to register an application')

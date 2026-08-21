@@ -11,46 +11,63 @@ const { Pool } = pg
 let pool: pg.Pool | null = null
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let drizzleDb: any = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let initPromise: Promise<{ pool: pg.Pool, db: any }> | null = null
 
 /**
- * Initializes the database connection pool and Drizzle ORM instance.
+ * Initializes the database connection pool and Drizzle ORM instance lazily.
  */
 export async function initDb() {
-  if (pool) return { pool, db: drizzleDb }
+  if (pool && drizzleDb) return { pool, db: drizzleDb }
+  if (initPromise) return initPromise
 
-  // In production (Cloud Run), use the IAM Cloud SQL Connector
-  if (process.env.INSTANCE_CONNECTION_NAME) {
-    console.info('[DB] Initializing Cloud SQL Connector for IAM Database Authentication...')
-    const connector = new Connector()
-    const clientOpts = await connector.getOptions({
-      instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
-      // @ts-expect-error: Cloud SQL Connector expects internal IpAddressTypes enum rather than PUBLIC string
-      ipType: 'PUBLIC',
-      // @ts-expect-error: Cloud SQL Connector expects internal AuthTypes enum rather than IAM string
-      authType: 'IAM'
-    })
+  initPromise = (async () => {
+    // In production (Cloud Run), use the IAM Cloud SQL Connector
+    if (process.env.INSTANCE_CONNECTION_NAME) {
+      console.info('[DB] Initializing Cloud SQL Connector for IAM Database Authentication...')
+      const connector = new Connector()
+      const clientOpts = await connector.getOptions({
+        instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
+        // @ts-expect-error: Cloud SQL Connector expects internal IpAddressTypes enum rather than PUBLIC string
+        ipType: 'PUBLIC',
+        // @ts-expect-error: Cloud SQL Connector expects internal AuthTypes enum rather than IAM string
+        authType: 'IAM'
+      })
 
-    pool = new Pool({
-      ...clientOpts,
-      user: process.env.DB_USER,
-      database: process.env.DB_DATABASE || 'postgres'
-    })
-  } else {
-    // In local development, connect via standard TCP pool
-    console.info('[DB] Initializing local database TCP pool...')
-    const dbConfig = {
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5432', 10),
-      user: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASSWORD || 'password',
-      database: process.env.DB_DATABASE || 'postgres',
-      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
+      pool = new Pool({
+        ...clientOpts,
+        user: process.env.DB_USER,
+        database: process.env.DB_DATABASE || 'postgres',
+        max: 10,
+        idleTimeoutMillis: 30000
+      })
+    } else {
+      // In local development, connect via standard TCP pool
+      console.info('[DB] Initializing local database TCP pool...')
+      const dbConfig = {
+        host: process.env.DB_HOST || 'localhost',
+        port: parseInt(process.env.DB_PORT || '5432', 10),
+        user: process.env.DB_USER || 'postgres',
+        password: process.env.DB_PASSWORD || 'password',
+        database: process.env.DB_DATABASE || 'postgres',
+        ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
+      }
+      pool = new Pool(dbConfig)
     }
-    pool = new Pool(dbConfig)
-  }
 
-  drizzleDb = drizzle(pool, { schema })
-  return { pool, db: drizzleDb }
+    drizzleDb = drizzle(pool, { schema })
+    return { pool, db: drizzleDb }
+  })()
+
+  return initPromise
+}
+
+/**
+ * Returns the active Drizzle database client, initializing the connection pool if not already active.
+ */
+export async function useDb() {
+  const { db } = await initDb()
+  return db
 }
 
 /**

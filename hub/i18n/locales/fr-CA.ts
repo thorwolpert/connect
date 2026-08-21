@@ -168,6 +168,9 @@ export default {
     emptyTitle: 'Aucun service ne correspond à vos filtres',
     emptySubtitle: 'Essayez d\'effacer les filtres actifs ou d\'ajuster vos termes de recherche pour voir les services disponibles.',
     resetFilters: 'Réinitialiser les filtres',
+    loadErrorTitle: 'Impossible de charger les services',
+    loadErrorSubtitle: 'Une erreur s\'est produite lors du chargement du catalogue des services. Veuillez réessayer.',
+    retry: 'Réessayer',
     links: {
       launchApp: 'Lancer l\'application',
       viewService: 'Afficher le service',

@@ -1,9 +1,10 @@
 import { asc } from 'drizzle-orm'
-import { db } from '../db'
+import { useDb } from '../db'
 import { applications } from '../db/schema'
 
 export default defineEventHandler(async () => {
   try {
+    const db = await useDb()
     const dbServices = await db.select()
       .from(applications)
       .orderBy(asc(applications.category), asc(applications.longName))

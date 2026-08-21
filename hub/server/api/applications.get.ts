@@ -1,5 +1,5 @@
 import { eq, desc, and } from 'drizzle-orm'
-import { db } from '../db'
+import { useDb } from '../db'
 import { applications } from '../db/schema'
 import { validateUserAccess } from '../utils/auth'
 
@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
   const shortName = queryParams.shortName as string
 
   try {
+    const db = await useDb()
     if (shortName) {
       const result = await db.select()
         .from(applications)

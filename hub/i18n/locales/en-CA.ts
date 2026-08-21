@@ -168,6 +168,9 @@ export default {
     emptyTitle: 'No services match your filters',
     emptySubtitle: 'Try clearing active filters or adjusting your search terms to see available services.',
     resetFilters: 'Reset filters',
+    loadErrorTitle: 'Unable to Load Services',
+    loadErrorSubtitle: 'We encountered an error loading the service catalog. Please try again.',
+    retry: 'Retry',
     links: {
       launchApp: 'Launch App',
       viewService: 'View Service',

@@ -30,13 +30,13 @@ FROM gcr.io/distroless/nodejs22-debian12
 
 WORKDIR /app
 
-# Copy ONLY compiled .output directory and DB migrations from builder stage
+# Copy compiled Nitro server output
 COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/server/db/migrations ./server/db/migrations
 
 # Set environment variables for Cloud Run execution
 ENV PORT=8080
 ENV NODE_ENV=production
+ENV NODE_OPTIONS="--no-warnings"
 
 EXPOSE 8080
 

@@ -63,9 +63,11 @@ interface ServiceItem {
 const activeFilters = ref<FilterItem[]>([])
 
 // Fetch services directly from DB API
-const { data: servicesResponse } = await useFetch('/api/services', {
+const { data: servicesResponse, status, error, refresh } = await useFetch('/api/services', {
   lazy: true
 })
+
+const isLoading = computed(() => status.value === 'pending')
 
 const allServices = computed<ServiceItem[]>(() => {
   return servicesResponse.value?.data || []
@@ -390,9 +392,68 @@ const removeFilter = (index: number) => {
       </div>
     </div>
 
+    <!-- Loading State: Skeleton Cards -->
+    <div
+      v-if="isLoading"
+      class="space-y-10 pt-4"
+    >
+      <div class="space-y-4">
+        <div class="h-10 rounded-lg bg-zinc-200 dark:bg-zinc-800/80 animate-pulse w-64" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="n in 6"
+            :key="n"
+            class="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-xs space-y-4 animate-pulse"
+          >
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3 flex-1">
+                <div class="w-12 h-12 rounded-lg bg-zinc-200 dark:bg-zinc-800 shrink-0" />
+                <div class="space-y-2 flex-1">
+                  <div class="h-4 bg-zinc-200 dark:bg-zinc-800 rounded w-3/4" />
+                  <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-1/2" />
+                </div>
+              </div>
+              <div class="w-16 h-5 bg-zinc-200 dark:bg-zinc-800 rounded-full shrink-0" />
+            </div>
+            <div class="space-y-2">
+              <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-full" />
+              <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-5/6" />
+            </div>
+            <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
+              <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-24" />
+              <div class="h-6 bg-zinc-200 dark:bg-zinc-800 rounded w-20" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div
+      v-else-if="error"
+      class="text-center py-16 bg-white dark:bg-zinc-900 rounded-xl border border-red-200 dark:border-red-900/50 space-y-4"
+    >
+      <UIcon
+        name="i-lucide-alert-circle"
+        class="size-12 mx-auto text-red-500"
+      />
+      <h3 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+        {{ $t('serviceCatalog.loadErrorTitle') }}
+      </h3>
+      <p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
+        {{ $t('serviceCatalog.loadErrorSubtitle') }}
+      </p>
+      <button
+        class="px-4 py-2 bg-bc-blue text-white rounded-md text-sm font-medium hover:bg-blue-900 transition-colors"
+        @click="() => refresh()"
+      >
+        {{ $t('serviceCatalog.retry') }}
+      </button>
+    </div>
+
     <!-- Categorized Service Sections -->
     <div
-      v-if="groupedServices.length > 0"
+      v-else-if="groupedServices.length > 0"
       class="space-y-10 pt-4"
     >
       <div

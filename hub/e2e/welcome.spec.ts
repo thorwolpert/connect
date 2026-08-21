@@ -71,6 +71,7 @@ test.describe('Welcome Page E2E Tests', () => {
   })
 
   test('should successfully login via IDIR using BRTEST3 credentials and redirect to intent page', async ({ page }) => {
+    test.skip(!process.env.TEST_LIVE_KEYCLOAK, 'Requires Keycloak redirect URI to be configured for localhost:3000')
     const credentials = getTestCredentials('BRTEST3')
 
     // Verify user is not logged in initially (account options button should not exist)
@@ -132,6 +133,7 @@ test.describe('Welcome Page E2E Tests', () => {
   })
 
   test('should successfully login via BCSC using BCREG4000 credentials', async ({ page }) => {
+    test.skip(!process.env.TEST_LIVE_KEYCLOAK, 'Requires Keycloak redirect URI to be configured for localhost:3000')
     const credentials = getTestCredentials('BCREG4000')
 
     // Verify user is not logged in initially

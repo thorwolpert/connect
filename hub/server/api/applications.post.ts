@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { db } from '../db'
+import { useDb } from '../db'
 import { applications } from '../db/schema'
 import { validateUserAccess } from '../utils/auth'
 
@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    const db = await useDb()
     // 1. Verify if the application already exists and belongs to the same organization
     const existing = await db.select()
       .from(applications)
